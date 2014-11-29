@@ -2,7 +2,7 @@ SocietyManagement
 =================
 
 Manage your society . Third Year Mini Project.
-
+Visual Basic and Oracle DB
 Third Year Mini Project having the following features:   
 1. Admin Dashboard.   
 2. Notice Board.   
