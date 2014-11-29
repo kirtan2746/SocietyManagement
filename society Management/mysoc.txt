@@ -1,0 +1,112 @@
+
+SQL> create table build (bname varchar2(3)primary key, nof number(2) check(nof<100));
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BUILD                          TABLE                                            
+
+SQL> create table member(memid varchar2(20)primary key, fname varchar2(15),mname varchar2(15),lname varchar2(15),bname varchar2(3),fno number(2)check(fno<100),ftype varchar2(10),owner varchar2(3),password varchar2(15),id number(1) check(id<2),phnno number(10));
+
+Table created.
+
+SQL> desc member;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MEMID                                     NOT NULL VARCHAR2(20)
+ FNAME                                              VARCHAR2(15)
+ MNAME                                              VARCHAR2(15)
+ LNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(3)
+ FNO                                                NUMBER(2)
+ FTYPE                                              VARCHAR2(10)
+ OWNER                                              VARCHAR2(3)
+ PASSWORD                                           VARCHAR2(15)
+ ID                                                 NUMBER(1)
+ PHNNO                                              NUMBER(10)
+
+SQL> create table worker(wid number(3)primary key, wname varchar2(20),address varchar2(100),salary number(5) check (salary<100000),wtype varchar2(15),doj varchar2(20),age number(2) check (age<100));
+
+Table created.
+
+SQL> desc worker;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WID                                       NOT NULL NUMBER(3)
+ WNAME                                              VARCHAR2(20)
+ ADDRESS                                            VARCHAR2(100)
+ SALARY                                             NUMBER(5)
+ WTYPE                                              VARCHAR2(15)
+ DOJ                                                VARCHAR2(20)
+ AGE                                                NUMBER(2)
+
+SQL> create table notices(notice varchar2(500),ndate date);
+
+Table created.
+
+SQL> create table mail(memid references member(memid),fromid references member(memid),subject varchar2(50),email varchar2(500));
+
+Table created.
+
+SQL> desc mail;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MEMID                                              VARCHAR2(20)
+ FROMID                                             VARCHAR2(20)
+ SUBJECT                                            VARCHAR2(50)
+ EMAIL                                              VARCHAR2(500)
+
+SQL> create table complaints(memid references member(memid), mdate date, comp varchar2(500), subject varchar2(50), opened number(1) check (opened <10));
+
+Table created.
+
+SQL> desc complaints;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MEMID                                              VARCHAR2(20)
+ MDATE                                              DATE
+ COMP                                               VARCHAR2(500)
+ SUBJECT                                            VARCHAR2(50)
+ OPENED                                             NUMBER(1)
+
+
+SQL> create table charges(memid references member(memid), chargepaid number(6) check (chargepaid<1000000),month varchar2(15),ispaid varchar2(10),ftype varchar2(10),fname varchar2(20));
+
+Table created.
+
+SQL> desc charges;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MEMID                                              VARCHAR2(20)
+ CHARGEPAID                                         NUMBER(6)
+ MONTH                                              VARCHAR2(15)
+ ISPAID                                             VARCHAR2(10)
+ FTYPE                                              VARCHAR2(10)
+ FNAME                                              VARCHAR2(20)
+
+SQL>  create table temp_charge(memid references member(memid), chargepaid number(6) check (chargepaid<1000000),month varchar2(15),ispaid varchar2(10),ftype varchar2(10),fname varchar2(20));
+
+SQL>CREATE SEQUENCE building_sequence
+ START WITH 1
+ INCREMENT BY 1;
+
+SQL>CREATE OR REPLACE TRIGGER worker_trigger
+ BEFORE INSERT
+ ON worker
+ REFERENCING NEW AS NEW
+ FOR EACH ROW
+ BEGIN
+ SELECT worker_sequence.nextval INTO :NEW.wid FROM dual;
+ END;
+/
+SQL>update member set memid ='ADMINISTRATOR ',fname = 'ADMIN',
+lname ='PRABHAKAR' where memid='a' ;
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

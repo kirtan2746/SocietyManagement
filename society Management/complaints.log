@@ -1,0 +1,7 @@
+Line 148: Class RichTextLib.RichTextBox of control rtbcomp was not a loaded control class.
+Line 154: The property name _ExtentX in rtbcomp is invalid.
+Line 155: The property name _ExtentY in rtbcomp is invalid.
+Line 156: The property name _Version in rtbcomp is invalid.
+Line 157: The property name ReadOnly in rtbcomp is invalid.
+Line 158: The property name MaxLength in rtbcomp is invalid.
+Line 159: The property name TextRTF in rtbcomp is invalid.

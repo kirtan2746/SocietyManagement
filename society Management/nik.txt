@@ -1,0 +1,95 @@
+SQL> create table(memid number(10),fname varchar(15),mname varchar(15),lname varchar(15),
+  2  bname varchar(3),fno number(2),owner varchar(1),ftype varchar(10))
+  3  
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create table(memid number(10),fname varchar(15),mname varchar(15),lname varchar(15),
+  2* bname varchar(3),fno number(2),ftype varchar(10),owner varchar(1))
+SQL> 
+SQL> /
+create table(memid number(10),fname varchar(15),mname varchar(15),lname varchar(15),
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create table member(memid number(10),fname varchar(15),mname varchar(15),lname varchar(15),
+  2* bname varchar(3),fno number(2),ftype varchar(10),owner varchar(1))
+SQL> /
+
+Table created.
+
+SQL> alter table member
+  2  add primary key number(10) (memid);
+add primary key number(10) (memid)
+                *
+ERROR at line 2:
+ORA-00906: missing left parenthesis 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  alter table member
+  2* add primary key (memid)
+SQL> /
+
+Table altered.
+
+SQL> desc member;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MEMID                                     NOT NULL NUMBER(10)
+ FNAME                                              VARCHAR2(15)
+ MNAME                                              VARCHAR2(15)
+ LNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(3)
+ FNO                                                NUMBER(2)
+ FTYPE                                              VARCHAR2(10)
+ OWNER                                              VARCHAR2(1)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> autocommit OFF
+autocommit OFF
+flagger OFF
+spool off;
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+SQL>  create table flat(ftype varchar2(10));
+
+Table created.
+
+SQL> insert into flat values('1 BHK');
+
+1 row created.
+
+SQL> insert into flat values('2 BHK');
+
+1 row created.
+
+SQL> insert into flat values('3 BHK');
+
+1 row created.
+
+
+
+Name                                      Null?    Type
+----------------------------------------- -------- ----------------------------
+MEMID                                              VARCHAR2(10)
+FNAME                                              VARCHAR2(15)
+MNAME                                              VARCHAR2(15)
+LNAME                                              VARCHAR2(15)
+BNAME                                              VARCHAR2(3)
+FNO                                                NUMBER(2)
+FTYPE                                              VARCHAR2(10)
+OWNER                                              VARCHAR2(1)
